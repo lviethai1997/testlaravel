@@ -19,38 +19,51 @@ Quản lý Categories
             <p>{{ $message }}</p>
         </div>
     @endif
-   
-    <table class="table table-bordered">
-        <tr>
-            <th>Name</th>
-            <th>slug</th>
-            <th>parents</th>
-            <th>SaleCate</th>
-            <th>Status</th>
-            <th width="280px">Action</th>
-        </tr>
-        @foreach ($category as $cate)
-        <tr>
-            <td>{{ $cate->cate_name }}</td>
-            <td>{{ $cate->slug }}</td>
-            <td>{{ $cate->parents }}</td>
-            <td>{{ $cate->salecate }}</td>
-            <td>
-            <input type="checkbox" data-id="{{ $cate->id }}" name="status" class="js-switch" {{ $cate->status == 1 ? 'checked' : '' }}>
-            </td>
-
-            <td>
-            <a class="btn btn-info" href="{{ route('category.create') }}">Create</a>
-
-            <a class="btn btn-primary" href="{{ route('category.edit',$cate->id) }}">Edit</a>
-
-            <button type="button" data-id="{{ $cate->id }}" class="btn btn-danger deletecate">Delete</button>
-            </td>
-        </tr>
-        @endforeach
-</table>
+<div class="panel">
+    <div class="panel-heading">
+        <h3 class="panel-title">Basic Data Tables with responsive plugin</h3>
+    </div>
+    <div class="panel-body">
+        <div id="demo-dt-basic_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+            <div class="row">
+                <div class="col-sm-12">
+                    <table id="demo-dt-basic" class="table table-striped table-bordered dataTable no-footer dtr-inline collapsed" cellspacing="0" width="100%" role="grid" aria-describedby="demo-dt-basic_info" style="width: 100%;">
+                        <thead>
+                            <tr role="row">
+                                <th class="sorting_asc" tabindex="0" aria-controls="demo-dt-basic" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 50px;">Name</th>
+                                <th class="sorting" tabindex="0" aria-controls="demo-dt-basic" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 100px;">slug</th>
+                                <th class="min-tablet sorting" tabindex="0" aria-controls="demo-dt-basic" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 100px;">parents</th>
+                                <th class="min-tablet sorting" tabindex="0" aria-controls="demo-dt-basic" rowspan="1" colspan="1" aria-label="Extn.: activate to sort column ascending" style="width: 50px;">SaleCate</th>
+                                <th class="min-tablet sorting" tabindex="0" aria-controls="demo-dt-basic" rowspan="1" colspan="1" aria-label="Extn.: activate to sort column ascending" style="width: 50px;">Status</th>
+                                <th class="min-tablet sorting" tabindex="0" aria-controls="demo-dt-basic" rowspan="1" colspan="1" aria-label="Extn.: activate to sort column ascending" style="width: 200px;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach ($category as $cate)
+                            <tr>
+                                <td>{{ $cate->cate_name }}</td>
+                                <td>{{ $cate->slug }}</td>
+                                <td>{{ $cate->parents }}</td>
+                                <td>{{ $cate->salecate }}</td>
+                                <td>
+                                <input type="checkbox" data-id="{{ $cate->id }}" name="status" class="js-switch" {{ $cate->status == 1 ? 'checked' : '' }}>
+                                </td>
+                                <td style="text-align:center">
+                                    <a class="btn btn-info" href="{{ route('category.create') }}">Create</a>
+                                    <a class="btn btn-primary" href="{{ route('category.edit',$cate->id) }}">Edit</a>
+                                    <button type="button" data-id="{{ $cate->id }}" class="btn btn-danger deletecate">Delete</button>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
     <script>
-         $(".deletecate").click(function(){
+        $(".deletecate").click(function(){
         let usrId = $(this).data('id');
         let $ele = $(this).parent().parent();
         if (confirm("Are you sure about this ?")) {

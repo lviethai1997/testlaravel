@@ -26,7 +26,6 @@
 	<!--Nifty Stylesheet [ REQUIRED ]-->
 	<link href="assets/admin/css/nifty.min.css" rel="stylesheet">
 
-	<link href="assets/admin/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 	<!--Font Awesome [ OPTIONAL ]-->
 	<link href="assets/admin/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
@@ -57,6 +56,9 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 	
+	<link href="assets/admin/plugins/datatables/media/css/dataTables.bootstrap.css" rel="stylesheet">
+	<link href="assets/admin/plugins/datatables/extensions/Responsive/css/dataTables.responsive.css" rel="stylesheet">
+
 	<!--SCRIPT-->
 	<!--=================================================-->
 
@@ -143,11 +145,9 @@
 		
 <!--jQuery [ REQUIRED ]-->
 
-<script src="assets/admin/js/jquery-3.4.1.min.js"></script>
-
+<script src="assets/admin/js/jquery-2.1.1.min.js"></script>
 <!--BootstrapJS [ RECOMMENDED ]-->
 <script src="assets/admin/js/bootstrap.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <!-- Fast Click [ OPTIONAL ] -->
 <script src="assets/admin/plugins/fast-click/fastclick.min.js"></script>
 <!--Nifty Admin [ RECOMMENDED ]-->
@@ -167,16 +167,20 @@
 <script src="assets/admin/js/demo/nifty-demo.min.js"></script>
 <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
 
+<script src="assets/admin/plugins/datatables/media/js/jquery.dataTables.js"></script>
+<script src="assets/admin/plugins/datatables/media/js/dataTables.bootstrap.js"></script>
+<script src="assets/admin/plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js"></script>
+<script src="assets/admin/js/demo/tables-datatables.js"></script>
 <script> CKEDITOR.replace('editor1'); </script>
 <!--Specify page [ SAMPLE ]-->
 <!-- <script src="assets/admin/js/demo/dashboard.js"></script> -->
 <!-- <script src="assets/admin/js/demo/tables-footable.js"></script> -->
-<script>
-$(document).ready(function() {
-    $('#example').DataTable();
-} );
-</script>
+
  <script>
+	$(document).ready( function () {
+		$("#myTable").DataTable();
+	});
+
     let elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
     elems.forEach(function(html) {
         let switchery = new Switchery(html,  { size: 'small' });

@@ -31,7 +31,7 @@ class ProductController extends Controller
          //Kích thước file với đơn vị byte
          $file_size = $file->getSize();
          if($file_type == 'image/png' || $file_type == 'image/jpg' || $file_type == 'image/jpeg' || $file_type == 'image/gif'){
-             if($file_size <= 1048576){
+             if($file_size <= 2048576){
                  $file_name = date('D-m-yyyy').'-'.rand().'-'.str_slug($file_name);
                  if($file->move('img/upload/product',$file_name))
                  {
@@ -47,7 +47,7 @@ class ProductController extends Controller
                  }
              }else
              {
-                 return back()->with('error','Bạn không thể upload ảnh quá 1mb');
+                 return back()->with('error','Bạn không thể upload ảnh quá 2mb');
              }
          }else
          {
