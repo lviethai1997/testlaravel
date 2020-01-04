@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Products;
 use App\Categories;
 
@@ -10,8 +11,8 @@ class ProductController extends Controller
 {
    public function index()
    {
-      $product = Products::latest()->paginate(5);
-      return view('admin.product.index',compact('product'))->with('i', (request()->input('page', 1) - 1) * 5);
+      $product = Products::with('category')->get();
+      return view('admin.product.index',\compact('product'));
    }
 
    public function show()
@@ -60,7 +61,7 @@ class ProductController extends Controller
 
    public function create()
    {
-      $category = Categories::where('parents','!=','0')->get();
+      $category = Categories::where('parents','!=',0)->get();
       return view('admin.product.add',\compact('category'));
    }
 
@@ -103,14 +104,19 @@ class ProductController extends Controller
    public function edit($id)
    {
         $product = Products::find($id);
-        return view('admin.product.edit',\compact('product'));
+        $category = Categories::where('parents','!=','0')->get();
+        return view('admin.product.edit',\compact('product','category'));
    }
 
-   public function destroy($id)
+   public function destroy(Request $request)
    {
-        $product = Products::find($id);
-        $product->delete();
-        return \redirect()->route('product.index')->with('success','Delete product successfully');
+       
+   }
+
+   public function deletePro($id)
+   {
+    Products::find($id)->delete($id);
+    return \response()->json(['message'=>'Delete product completed.']);
    }
 
    public function updateStatus(Request $request)

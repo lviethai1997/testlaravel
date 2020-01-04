@@ -31,7 +31,7 @@ Quản lý Categories
         </tr>
         @foreach ($category as $cate)
         <tr>
-            <td>{{ $cate->name }}</td>
+            <td>{{ $cate->cate_name }}</td>
             <td>{{ $cate->slug }}</td>
             <td>{{ $cate->parents }}</td>
             <td>{{ $cate->salecate }}</td>
@@ -40,22 +40,35 @@ Quản lý Categories
             </td>
 
             <td>
-                <form action="{{ route('category.destroy',$cate->id) }}" method="POST">
-   
-                    <a class="btn btn-info" href="{{ route('category.create') }}">Create</a>
-    
-                    <a class="btn btn-primary" href="{{ route('category.edit',$cate->id) }}">Edit</a>
-   
-                    @csrf
-                    @method('DELETE')
-      
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
+            <a class="btn btn-info" href="{{ route('category.create') }}">Create</a>
+
+            <a class="btn btn-primary" href="{{ route('category.edit',$cate->id) }}">Edit</a>
+
+            <button type="button" data-id="{{ $cate->id }}" class="btn btn-danger deletecate">Delete</button>
             </td>
         </tr>
         @endforeach
 </table>
     <script>
+         $(".deletecate").click(function(){
+        let usrId = $(this).data('id');
+        let $ele = $(this).parent().parent();
+        if (confirm("Are you sure about this ?")) {
+        $.ajax({
+            type:"GET",
+            url: '/category/delete/'+ usrId,
+            data: { 'id': usrId },
+            success: function(data){
+                $ele.fadeOut().remove();
+                toastr.options.closeButton = true;
+                toastr.options.closeMethod = 'fadeOut';
+                toastr.options.closeDuration = 100;
+                toastr.success(data.message);
+            }
+        });
+        }
+        return false;
+    });
         $(document).ready(function(){
             $('.js-switch').change(function () {
                 let status = $(this).prop('checked') === true ? 1 : 0;

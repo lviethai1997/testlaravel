@@ -64,7 +64,7 @@
                             <select name="category_id" class="form-control input-sm" id="demo-is-inputsmall">
                             @if(isset($category))
                             @foreach($category as $cate)
-                            <option value="{{ $cate->id }}">{{ $cate->name }}</option>
+                            <option value="{{ $cate->id }}">{{ $cate->cate_name }}</option>
                             @endforeach
                             @else
                             <option value="0">parent</option>
