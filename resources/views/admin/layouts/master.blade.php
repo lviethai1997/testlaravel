@@ -67,7 +67,7 @@
 </head>
 
 <body>
-	<div id="container" name='sidebar' class="effect {{ $assets->sidebar == 0 ? 'mainnav-sm' : 'mainnav-lg' }} ">
+	<div id="container" name='sidebar' class="effect {{ $assets->sidebar == 0 ? 'mainnav-sm' : 'mainnav-lg' }} {{ $assets->openchat == 0 ? 'aside-in' : '' }} ">
 	
 		<!--NAVBAR-->
 		<!--===================================================-->
@@ -150,13 +150,13 @@
 <!--Demo script [ DEMONSTRATION ]-->
 <!-- <script src="assets/admin/plugins/fooTable/dist/footable.all.min.js"></script> -->
 <script src="assets/admin/js/demo/nifty-demo.min.js"></script>
-<script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+<script src="ckeditor/ckeditor.js"></script>
 
 <script src="assets/admin/plugins/datatables/media/js/jquery.dataTables.js"></script>
 <script src="assets/admin/plugins/datatables/media/js/dataTables.bootstrap.js"></script>
 <script src="assets/admin/plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js"></script>
 <script src="assets/admin/js/demo/tables-datatables.js"></script>
-<script> CKEDITOR.replace('editor1'); </script>
+
 <!--Specify page [ SAMPLE ]-->
 <!-- <script src="assets/admin/js/demo/dashboard.js"></script> -->
 <!-- <script src="assets/admin/js/demo/tables-footable.js"></script> -->
@@ -174,7 +174,6 @@
 	$(document).ready(function(){
 		$(".tgl-menu-btn").click(function(){
 			let sidebar = $('div[name=sidebar]').hasClass('mainnav-sm') === true ? 0 : 1;
-			console.log(sidebar);
 			$.ajax({
 				type: "GET",
 				dataType:"json",
@@ -189,6 +188,38 @@
 			});
 		});
 	});
+
+	$(document).ready(function(){
+		$("#openchat").click(function(){
+			let openchat = $('div[name=sidebar]').hasClass('aside-in') === true ? 0 : 1;
+			$.ajax({
+				type: "GET",
+				dataType: "json",
+				url: '{{ route('openchat.update') }}',
+				data: { 'openchat': openchat },
+				success: function(data){
+					toastr.options.closeButton = true;
+                    toastr.options.closeMethod = 'fadeOut';
+                    toastr.options.closeDuration = 100;
+                    toastr.success(data.message);
+				}
+			});
+		});
+	});
+
+	$(document).ready(function(){
+		$("#activeList").click(function(){
+			let activelist = $(this).hasClass('active')===true ? 0 : 1;
+			$.ajax({
+				type: "GET",
+				dataType: "json",
+				url : '{{ route('activelist.update') }}',
+				data: {'activelist': activelist},
+				success: function(data){
+				}
+			})
+		})
+	})
     </script>
 	
 </body>

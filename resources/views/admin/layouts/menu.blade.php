@@ -5,7 +5,7 @@
 					<!--================================-->
 					<div id="mainnav-shortcut">
 						<ul class="list-unstyled">
-							<li class="col-xs-4" data-content="Additional Sidebar">
+							<li class="col-xs-4" data-content="Additional Sidebar" id="openchat">
 								<a id="demo-toggle-aside" class="shortcut-grid" href="#">
 									<i class="fa fa-magic"></i>
 								</a>
@@ -48,7 +48,7 @@
 									</li>
 						
 									<!--Menu list item-->
-									<li>
+									<li class="{{ $assets->openchat1 == 0 ? 'active' : '' }}" id="activeList">
 										<a href="#">
 											<i class="fa fa-th"></i>
 											<span class="menu-title">
@@ -56,7 +56,6 @@
 											</span>
 											<i class="arrow"></i>
 										</a>
-						
 										<!--Submenu-->
 										<ul class="collapse">
 											<li><a href="{{ route('category.index') }}">category</a></li>

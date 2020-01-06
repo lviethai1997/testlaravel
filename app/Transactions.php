@@ -8,4 +8,9 @@ class Transactions extends Model
 {
     protected $table = 'transactions';
     protected $fillable =['*'];
+
+    public function user()
+    {
+        return $this->belongsTo('App\Users');
+    }
 }

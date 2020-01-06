@@ -30,3 +30,5 @@ Route::get('/category/status/update','CategoryController@updateStatus')->name('c
 Route::get('/category/delete/{id}','CategoryController@destroy');
 
 Route::get('/assets/sidebar','AssetsController@sidebar')->name('sidebar.update');
+Route::get('/assets/openchat','AssetsController@openchat')->name('openchat.update');
+Route::get('/assets/activelist','AssetsController@activelist')->name('activelist.update');

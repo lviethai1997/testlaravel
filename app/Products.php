@@ -8,12 +8,16 @@ use Eloquent;
 class Products extends Model
 {
     protected $table = 'products';
-    protected $guarded = [];
+    protected $fillable = ['*'];
 
     public function category()
     {
         return $this->belongsTo('App\Categories');
     }
 
+    public function order()
+    {
+        return $this->belongsTo('App\Orders');
+    }
 
 }

@@ -91,6 +91,7 @@
                         @if ($errors->has('description'))
                             <div class="aler alert-danger">{{ $errors->first('description')}}</div>
                         @endif
+                        <script> CKEDITOR.replace('editor1'); </script>
                         </div>
                     </div>
                 <div class="panel-footer">
@@ -107,4 +108,5 @@
         </div>
     </div>
 </div>
+
 @endsection

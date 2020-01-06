@@ -7,5 +7,5 @@ use App\assets;
 
 class assets extends Model
 {
-    protected $fillable = ['sidebar'];
+    protected $fillable = ['*'];
 }
