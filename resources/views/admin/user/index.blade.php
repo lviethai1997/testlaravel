@@ -18,9 +18,9 @@ Quản lý Users
             <p>{{ $message }}</p>
         </div>
     @endif
-    <div class="panel">
+<div class="panel">
     <div class="panel-heading">
-        <h3 class="panel-title">Basic Data Tables with responsive plugin</h3>
+        <h3 class="panel-title">Users</h3>
     </div>
     <div class="panel-body">
         <div id="demo-dt-basic_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
@@ -29,7 +29,7 @@ Quản lý Users
                     <table id="demo-dt-basic" class="table table-striped table-bordered dataTable no-footer dtr-inline collapsed" cellspacing="0" width="100%" role="grid" aria-describedby="demo-dt-basic_info" style="width: 100%;">
                         <thead>
                             <tr role="row">
-                                <th class="sorting_asc" tabindex="0" aria-controls="demo-dt-basic" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 50px;">No</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="demo-dt-basic" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 30px;">ID</th>
                                 <th class="sorting" tabindex="0" aria-controls="demo-dt-basic" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 100px;">Name</th>
                                 <th class="min-tablet sorting" tabindex="0" aria-controls="demo-dt-basic" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 100px;">Email</th>
                                 <th class="min-tablet sorting" tabindex="0" aria-controls="demo-dt-basic" rowspan="1" colspan="1" aria-label="Extn.: activate to sort column ascending" style="width: 50px;">Phone</th>
@@ -42,7 +42,7 @@ Quản lý Users
                         <tbody>
                         @foreach ($user as $users)
                             <tr>
-                                <td>{{ ++$i }}</td>
+                                <td style="text-align:center">{{ $users->id }}</td>
                                 <td>{{ $users->name }}</td>
                                 <td>{{ $users->email }}</td>
                                 <td>{{ $users->phone }}</td>
@@ -53,9 +53,7 @@ Quản lý Users
                                 </td>
                                 <td style="text-align:center">
                                     <a class="btn btn-info" href="{{ route('user.create') }}">Create</a>
-
                                     <a class="btn btn-primary" href="{{ route('user.edit',$users->id) }}">Edit</a>
-
                                     <button type="button" data-id="{{ $users->id }}" class="btn btn-danger deleteuser">Delete</button>
                                 </td>
                             </tr>
@@ -67,7 +65,7 @@ Quản lý Users
         </div>
     </div>
 </div>
-    <script>
+<script>
     $(".deleteuser").click(function(){
         let usrId = $(this).data('id');
         let $ele = $(this).parent().parent();
@@ -87,23 +85,23 @@ Quản lý Users
         }
         return false;
     });
-        $(document).ready(function(){
-            $('.js-switch').change(function () {
-                let status = $(this).prop('checked') === true ? 1 : 0;
-                let usrId = $(this).data('id');
-                $.ajax({
-                    type: "GET",
-                    dataType: "json",
-                    url: '{{ route('user.update.status') }}',
-                    data: {'status': status, 'id': usrId},
-                    success: function (data) {
-                        toastr.options.closeButton = true;
-                        toastr.options.closeMethod = 'fadeOut';
-                        toastr.options.closeDuration = 100;
-                        toastr.success(data.message);
-                    }
-                });
+    $(document).ready(function(){
+        $('.js-switch').change(function () {
+            let status = $(this).prop('checked') === true ? 1 : 0;
+            let usrId = $(this).data('id');
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: '{{ route('user.update.status') }}',
+                data: {'status': status, 'id': usrId},
+                success: function (data) {
+                    toastr.options.closeButton = true;
+                    toastr.options.closeMethod = 'fadeOut';
+                    toastr.options.closeDuration = 100;
+                    toastr.success(data.message);
+                }
             });
         });
-    </script> 
+    });
+</script> 
 @stop

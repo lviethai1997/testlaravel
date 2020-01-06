@@ -28,3 +28,5 @@ Route::get('/product/delete/{id}','ProductController@deletePro');
 Route::resource('category','CategoryController');
 Route::get('/category/status/update','CategoryController@updateStatus')->name('category.update.status');
 Route::get('/category/delete/{id}','CategoryController@destroy');
+
+Route::get('/assets/sidebar','AssetsController@sidebar')->name('sidebar.update');

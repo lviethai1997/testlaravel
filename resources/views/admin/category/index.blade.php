@@ -3,16 +3,6 @@
 Quản lý Categories
 @endsection
 @section('content')
-<!-- <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                
-            </div>
-            <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('category.create') }}"> Create New category</a>
-            </div>
-        </div>
-    </div> -->
    
     @if ($message = Session::get('success'))
         <div class="alert alert-success">
@@ -30,6 +20,7 @@ Quản lý Categories
                     <table id="demo-dt-basic" class="table table-striped table-bordered dataTable no-footer dtr-inline collapsed" cellspacing="0" width="100%" role="grid" aria-describedby="demo-dt-basic_info" style="width: 100%;">
                         <thead>
                             <tr role="row">
+                                <th class="sorting_asc" tabindex="0" aria-controls="demo-dt-basic" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 30px;">ID</th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="demo-dt-basic" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 50px;">Name</th>
                                 <th class="sorting" tabindex="0" aria-controls="demo-dt-basic" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 100px;">slug</th>
                                 <th class="min-tablet sorting" tabindex="0" aria-controls="demo-dt-basic" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 100px;">parents</th>
@@ -41,6 +32,7 @@ Quản lý Categories
                         <tbody>
                         @foreach ($category as $cate)
                             <tr>
+                                <td>{{ $cate->id }}</td>
                                 <td>{{ $cate->cate_name }}</td>
                                 <td>{{ $cate->slug }}</td>
                                 <td>{{ $cate->parents }}</td>
@@ -82,23 +74,23 @@ Quản lý Categories
         }
         return false;
     });
-        $(document).ready(function(){
-            $('.js-switch').change(function () {
-                let status = $(this).prop('checked') === true ? 1 : 0;
-                let cateId = $(this).data('id');
-                $.ajax({
-                    type: "GET",
-                    dataType: "json",
-                    url: '{{ route('category.update.status') }}',
-                    data: {'status': status, 'id': cateId},
-                    success: function (data) {
-                        toastr.options.closeButton = true;
-                        toastr.options.closeMethod = 'fadeOut';
-                        toastr.options.closeDuration = 100;
-                        toastr.success(data.message);
-                    }
-                });
+    $(document).ready(function(){
+        $('.js-switch').change(function () {
+            let status = $(this).prop('checked') === true ? 1 : 0;
+            let cateId = $(this).data('id');
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: '{{ route('category.update.status') }}',
+                data: {'status': status, 'id': cateId},
+                success: function (data) {
+                    toastr.options.closeButton = true;
+                    toastr.options.closeMethod = 'fadeOut';
+                    toastr.options.closeDuration = 100;
+                    toastr.success(data.message);
+                }
             });
         });
+    });
     </script>
 @stop

@@ -8,8 +8,8 @@ class UserController extends Controller
 {
     public function index()
     {
-        $user = Users::latest()->paginate(5);
-        return view('admin.user.index',compact('user'))->with('i', (request()->input('page', 1) - 1) * 5);
+        $user = Users::All();
+        return view('admin.user.index',compact('user'));
     }
 
     public function show()
@@ -60,5 +60,4 @@ class UserController extends Controller
         $user->save();
         return \response()->json(['message'=>'Change status completed']);
     }
-    
 }

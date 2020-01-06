@@ -63,19 +63,6 @@
                             <input type="textarea" required  value="{{ $user->address }}" name="address" placeholder="Nhập địa chỉ nhà" class="form-control" id="demo-is-inputnormal">
                         </div>
                     </div>
-                    <!-- <div class="form-group">
-                        <div class="input-group-btn" style="left:280px">
-                                <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle" type="button" aria-expanded="false">Action <i class="dropdown-caret fa fa-caret-down"></i>
-                                </button>
-                                <ul class="dropdown-menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                            </ul>
-                        </div>
-                    </div> -->
                 <div class="panel-footer">
                     <div class="row">
                         <div class="col-sm-9 col-sm-offset-3" style="padding-top:10px">

@@ -16,8 +16,6 @@
     <base href="{{asset('')}}">
 	<!--Open Sans Font [ OPTIONAL ] -->
  	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=latin" rel="stylesheet">
-
-    
 	 
 	<!--Bootstrap Stylesheet [ REQUIRED ]-->
 	<link href="assets/admin/css/bootstrap.min.css" rel="stylesheet">
@@ -69,8 +67,8 @@
 </head>
 
 <body>
-	<div id="container" class="effect mainnav-lg">
-		
+	<div id="container" name='sidebar' class="effect {{ $assets->sidebar == 0 ? 'mainnav-sm' : 'mainnav-lg' }} ">
+	
 		<!--NAVBAR-->
 		<!--===================================================-->
 		@include('admin.layouts.header')
@@ -91,7 +89,6 @@
 				<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 				<!--End page title-->
 
-
 				<!--Breadcrumb-->
 				<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 				<ol class="breadcrumb">
@@ -102,9 +99,6 @@
 				<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 				<!--End breadcrumb-->
 
-
-		
-
 				<!--Page content-->
 				<!--===================================================-->
 				<div id="page-content">
@@ -112,14 +106,10 @@
 				</div>
 				<!--===================================================-->
 				<!--End page content-->
-
-
 			</div>
 			<!--===================================================-->
 			<!--END CONTENT CONTAINER-->
 
-
-			
 			<!--MAIN NAVIGATION-->
 			<!--===================================================-->
 			@include('admin.layouts.menu')
@@ -131,17 +121,12 @@
 			@include('admin.layouts.aside-right')
 			<!--===================================================-->
 			<!--END ASIDE-->
-
 		</div>
-
-		
-
 		<!-- FOOTER -->
 		<!--===================================================-->
 		@include('admin.layouts.footer')
 		<!--===================================================-->
 		<!-- END FOOTER -->
-
 		
 <!--jQuery [ REQUIRED ]-->
 
@@ -185,6 +170,25 @@
     elems.forEach(function(html) {
         let switchery = new Switchery(html,  { size: 'small' });
     });
+
+	$(document).ready(function(){
+		$(".tgl-menu-btn").click(function(){
+			let sidebar = $('div[name=sidebar]').hasClass('mainnav-sm') === true ? 0 : 1;
+			console.log(sidebar);
+			$.ajax({
+				type: "GET",
+				dataType:"json",
+				url: '{{ route('sidebar.update') }}',
+				data: { 'sidebar': sidebar },
+				success: function(data){
+					toastr.options.closeButton = true;
+                    toastr.options.closeMethod = 'fadeOut';
+                    toastr.options.closeDuration = 100;
+                    toastr.success(data.message);
+				}
+			});
+		});
+	});
     </script>
 	
 </body>
