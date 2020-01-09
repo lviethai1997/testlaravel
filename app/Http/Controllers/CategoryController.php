@@ -17,7 +17,7 @@ class CategoryController extends Controller
     {
         $data = $request->all();
         $data = request()->except(['_token']);
-        $data['slug'] = str_slug($request->name);
+        $data['slug'] = str_slug($request->cate_name);
         Categories::insert($data);
         return \redirect()->route('category.index')->with('success','add category successfuly');
     }
@@ -31,9 +31,9 @@ class CategoryController extends Controller
     public function update(Request $request,$id)
     {
         $data = $request->all();
-        $data['slug'] = str_slug($request->name);
-        $category = Categories::find($id);
-        $category->update($data);
+        $data = request()->except(['_token','_method']);
+        $data['slug'] = str_slug($request->cate_name);
+        Categories::where('id',$id)->update($data);
         return redirect()->route('category.index')->with('success','update category successfuly');
     }
 

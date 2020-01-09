@@ -67,8 +67,9 @@ class ProductController extends Controller
 
    public function update(Request $request,$id)
    {
-        $product = Products::find($id);
+       $product = Products::where('id',$id);
         $data = $request->all();
+        $data = request()->except(['_token','_method']);
         $data['slug'] = str_slug($request->name);
         if($request->hasFile('thunbar')){
             $file = $request->thunbar;
@@ -93,11 +94,8 @@ class ProductController extends Controller
             {
                 return back()->with('error','File bạn chọn không là hình ảnh');
             }
-        }else
-        {
-           $data['thunbar'] = $product->thunbar;
         }
-        $product->update($data);
+        Products::where('id',$id)->update($data);
         return \redirect()->route('product.index')->with('success','Update product successfully');
    }
 

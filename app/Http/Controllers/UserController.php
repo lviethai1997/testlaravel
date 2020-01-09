@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Users;
+use DB;
 class UserController extends Controller
 {
     public function index()
@@ -26,10 +27,12 @@ class UserController extends Controller
     public function update(Request $request,$id)
     {
        $data = $request->all();
+       $data = $request->except('_method', '_token');
+       $data['password'] = bcrypt($request->password);
        $data['status'] = '0';
-       $user = Users::find($id);
-       $user->update($data);
+        Users::where('id','=',$id)->update($data);
        return redirect()->route('user.index')->with('success','Product update successfully.');
+       
     }
 
     public function edit($id)
@@ -48,8 +51,10 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        $data = request()->except(['_token']);
         $data['status'] = '0';
-        Users::create($data);
+        $data['password'] = bcrypt($request->password);
+        Users::insert($data);
         return redirect()->route('user.index')->with('success','Product created successfully.');
     }
 

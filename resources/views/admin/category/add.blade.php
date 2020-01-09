@@ -29,7 +29,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label" for="demo-is-inputsmall">Tên danh mục sản phẩm</label>
                         <div class="col-sm-6">
-                            <input type="text" required  name="name" placeholder="Nhập tên danh mục sản phẩm" class="form-control input-sm" id="demo-is-inputsmall">
+                            <input type="text" required  name="cate_name" placeholder="Nhập tên danh mục sản phẩm" class="form-control input-sm" id="demo-is-inputsmall">
                         </div>
                     </div>
                     <div class="form-group">
@@ -39,7 +39,7 @@
                             <option value="0" selected>parent </option>
                             @if(isset($category))
                             @foreach($category as $cate)
-                            <option value="{{ $cate->id }}">{{ $cate->name }}</option>
+                            <option value="{{ $cate->id }}">{{ $cate->cate_name }}</option>
                             @endforeach
                             @else
                             <option value="0"></option>
