@@ -15,6 +15,21 @@ Route::get('/', function () {
     return view('admin.index');
 })->name('admin.index');
 
+Route::get('/trang-chu',function(){
+    return view('home.index');
+})->name('home.index');
+
+Route::get('/danh-muc-san-pham',function(){
+    return view('home.categories');
+})->name('home.categories');
+
+Route::get('/chi-tiet-san-pham',function(){
+    return view('home.details');
+})->name('home.details');
+
+Route::get('/gioi-thieu',function(){
+    return view('home.about');
+})->name('home.about');
 
 //User
 Route::resource('user','UserController');
