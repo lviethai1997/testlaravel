@@ -2,21 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Categories;
-use App\Products;
+use App\News;
 use Illuminate\Http\Request;
 use File;
-class ProductController extends Controller
+class NewsController extends Controller
 {
     public function index()
     {
-        $product = Products::with('category')->get();
-        return view('admin.product.index', \compact('product'));
+        $news = News::all();
+        return view('admin.new.index',\compact('news'));
     }
 
-    public function show()
+    public function create()
     {
-
+        return view('admin.new.add');
     }
 
     public function store(Request $request)
@@ -32,16 +31,14 @@ class ProductController extends Controller
             if ($file_type == 'image/png' || $file_type == 'image/jpg' || $file_type == 'image/jpeg' || $file_type == 'image/gif') {
                 if ($file_size <= 2048576) {
                     $file_name = date('D-m-yyyy') . '-' . rand() . '-' . str_slug($file_name);
-                    if ($file->move('img/upload/product', $file_name)) {
+                    if ($file->move('img/upload/news', $file_name)) {
                         $data = $request->all();
                         $data = request()->except(['_token']);
-                        $data['slug'] = str_slug($request->name);
-                        $data['view'] = 0;
-                        $data['pay'] = 0;
-                        $data['images'] = "fdgdf";
+                        $data['slug'] = str_slug($request->title);
                         $data['thunbar'] = $file_name;
-                        Products::insert($data);
-                        return redirect()->route('product.index')->with('success', 'Đã thêm thành công sản phẩm mới');
+                        $data['users_id'] = 0;
+                        News::insert($data);
+                        return redirect()->route('new.index')->with('success', 'Đã thêm tin tức mới');
                     }
                 } else {
                     return back()->with('error', 'Bạn không thể upload ảnh quá 2mb');
@@ -54,18 +51,23 @@ class ProductController extends Controller
         }
     }
 
-    public function create()
+    public function show(News $news)
     {
-        $category = Categories::where('parents', '!=', 0)->get();
-        return view('admin.product.add', \compact('category'));
+        //
     }
 
-    public function update(Request $request, $id)
+    public function edit($id)
     {
-        $product = Products::find($id);
+        $new = News::find($id);
+        return view('admin.new.edit',\compact('new'));
+    }
+
+    public function update(Request $request,$id)
+    {
+        $new = News::find($id);
         $data = $request->all();
         $data = request()->except(['_token', '_method']);
-        $data['slug'] = str_slug($request->name);
+        $data['slug'] = str_slug($request->title);
         if ($request->hasFile('thunbar')) {
             $file = $request->thunbar;
             //Lấy tên file
@@ -77,10 +79,10 @@ class ProductController extends Controller
             if ($file_type == 'image/png' || $file_type == 'image/jpg' || $file_type == 'image/jpeg' || $file_type == 'image/gif') {
                 if ($file_size <= 2048576) {
                     $file_name = date('D-m-yyyy') . '-' . rand() . '-' . str_slug($file_name);
-                    if ($file->move('img/upload/product', $file_name)) {
+                    if ($file->move('img/upload/news', $file_name)) {
                         $data['thunbar'] = $file_name;
-                        if (File::exists('img/upload/product' . $product->thunbar)) {
-                            unlink('img/upload/product' . $product->thunbar);
+                        if (File::exists('img/upload/news' . $new->thunbar)) {
+                            unlink('img/upload/news' . $new->thunbar);
                         }
                     }
                 } else {
@@ -90,38 +92,26 @@ class ProductController extends Controller
                 return back()->with('error', 'File bạn chọn không là hình ảnh');
             }
         }
-        Products::where('id', $id)->update($data);
-        return \redirect()->route('product.index')->with('success', 'Update product successfully');
+        News::where('id', $id)->update($data);
+        return \redirect()->route('new.index')->with('success', 'Update news successfully');
     }
 
-    public function edit($id)
+    public function destroy($id)
     {
-        $product = Products::find($id);
-        $category = Categories::where('parents', '!=', '0')->get();
-        return view('admin.product.edit', \compact('product', 'category'));
-    }
-
-    public function destroy(Request $request)
-    {
-
-    }
-
-    public function deletePro($id)
-    {
-        $product = Products::find($id);
-        if(File::exists('img/upload/product/'.$product->thunbar)){
-            unlink('img/upload/product/'.$product->thunbar);
+        $new = News::find($id);
+        if(File::exists('img/upload/news/'.$new->thunbar)){
+            unlink('img/upload/news/'.$new->thunbar);
         }
-        $product->delete();
-        return \response()->json(['message' => 'Delete product completed.']);
+        $new->delete();
+        return \response()->json(['message' => 'Delete news completed.']);
     }
 
     public function updateStatus(Request $request)
     {
-        $product = Products::findOrFail($request->id);
-        $product->status = $request->status;
+        $new = News::findOrFail($request->id);
+        $new->status = $request->status;
 
-        $product->save();
+        $new->save();
         return \response()->json(['message' => 'Change status completed.']);
     }
 }

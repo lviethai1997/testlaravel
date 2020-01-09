@@ -29,6 +29,10 @@ Route::resource('category','CategoryController');
 Route::get('/category/status/update','CategoryController@updateStatus')->name('category.update.status');
 Route::get('/category/delete/{id}','CategoryController@destroy');
 
+Route::resource('new','NewsController');
+Route::get('/new/status/update','NewsController@updateStatus')->name('news.update.status');
+Route::get('/new/delete/{id}','NewsController@destroy');
+
 Route::get('/assets/sidebar','AssetsController@sidebar')->name('sidebar.update');
 Route::get('/assets/openchat','AssetsController@openchat')->name('openchat.update');
 Route::get('/assets/activelist','AssetsController@activelist')->name('activelist.update');

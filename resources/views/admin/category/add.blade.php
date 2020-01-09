@@ -57,7 +57,8 @@
                     <div class="row">
                         <div class="col-sm-9 col-sm-offset-3" style="padding-top:10px">
                             <button class="btn btn-info btn-labeled fa fa-user fa-lg" type="submit">Thêm Mới</button>
-                            <!-- <a type="button" href="{{ route('user.index') }}" class="btn btn-warning btn-labeled fa fa-repeat fa-lg" type="reset">Hủy Bỏ</a> -->
+                            <button class="btn btn-warning btn-labeled fa fa-user fa-lg" type="reset">Reset</button>
+                            <button onclick="location.href='{{ route('category.index') }}'" class="btn btn-danger btn-labeled fa fa-repeat fa-lg" type="reset">Hủy Bỏ</button>
                         </div>
                     </div>
                 </div>

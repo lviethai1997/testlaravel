@@ -56,6 +56,7 @@
 	
 	<link href="assets/admin/plugins/datatables/media/css/dataTables.bootstrap.css" rel="stylesheet">
 	<link href="assets/admin/plugins/datatables/extensions/Responsive/css/dataTables.responsive.css" rel="stylesheet">
+	<script src="//cdn.ckeditor.com/4.13.1/full/ckeditor.js"></script>
 
 	<!--SCRIPT-->
 	<!--=================================================-->
@@ -150,8 +151,7 @@
 <!--Demo script [ DEMONSTRATION ]-->
 <!-- <script src="assets/admin/plugins/fooTable/dist/footable.all.min.js"></script> -->
 <script src="assets/admin/js/demo/nifty-demo.min.js"></script>
-<script src="ckeditor/ckeditor.js"></script>
-
+<!-- <script src="ckeditor/ckeditor.js"></script> -->
 <script src="assets/admin/plugins/datatables/media/js/jquery.dataTables.js"></script>
 <script src="assets/admin/plugins/datatables/media/js/dataTables.bootstrap.js"></script>
 <script src="assets/admin/plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js"></script>
@@ -217,10 +217,10 @@
 				data: {'activelist': activelist},
 				success: function(data){
 				}
-			})
-		})
-	})
-    </script>
+			});
+		});
+	});
 	
+    </script>
 </body>
 </html>

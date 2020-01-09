@@ -61,6 +61,7 @@
 											<li><a href="{{ route('category.index') }}">category</a></li>
 											<li><a href="{{ route('user.index') }}">user</a></li>
 											<li><a href="{{ route('product.index') }}">product</a></li>
+											<li><a href="{{ route('new.index') }}">News</a></li>
 										</ul>
 									</li>
 						

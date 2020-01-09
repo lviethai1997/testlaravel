@@ -37,9 +37,10 @@
                         <label class="col-sm-3 control-label" for="demo-is-inputsmall">parents</label>
                         <div class="col-sm-6">
                             <select name="parents" class="form-control input-sm" id="demo-is-inputsmall">
+                            <option value="0">parent</option>
                             @if(isset($danhmuc))
                             @foreach($danhmuc as $cate)
-                            <option value="{{ $cate->id }}">{{ $cate->cate_name }}</option>
+                            <option value="{{ $cate->id }}" select>{{ $cate->cate_name }}</option>
                             @endforeach
                             @else
                             <option value="0"></option>
@@ -57,7 +58,7 @@
                     <div class="row">
                         <div class="col-sm-9 col-sm-offset-3" style="padding-top:10px">
                             <button class="btn btn-info btn-labeled fa fa-user fa-lg" type="submit">Cập nhật</button>
-                            <!-- <a type="button" href="{{ route('user.index') }}" class="btn btn-warning btn-labeled fa fa-repeat fa-lg" type="reset">Hủy Bỏ</a> -->
+                            <button onclick="location.href='{{ route('category.index') }}'" class="btn btn-warning btn-labeled fa fa-repeat fa-lg" type="reset">Hủy Bỏ</button>
                         </div>
                     </div>
                 </div>
