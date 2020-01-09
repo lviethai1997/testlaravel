@@ -31,6 +31,19 @@ Route::get('/gioi-thieu',function(){
     return view('home.about');
 })->name('home.about');
 
+Route::get('/gio-hang',function(){
+    return view('home.cart');
+})->name('home.cart');
+
+Route::get('/tin-tuc',function(){
+    return view('home.blog');
+})->name('home.blog');
+
+
+Route::get('/check-out',function(){
+    return view('home.checkout');
+})->name('home.checkout');
+
 //User
 Route::resource('user','UserController');
 Route::get('/user/status/update','UserController@updateStatus')->name('user.update.status');
